@@ -1,0 +1,191 @@
+.chat-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: .2rem;
+    margin-bottom: 1rem;
+    background-color: #221818;
+
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+}
+
+.parent-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100vw;       
+    max-width: 100vw;
+    margin: 0;
+    padding: 50px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+
+.date {
+    text-align: right;
+    margin-right: 20px;
+    color: rgb(229, 143, 143);
+}
+
+@media (max-width: 768px) {
+    .parent-card {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+.floating-btn {
+  position: fixed;          /* stays on screen always */
+  bottom: 20px;             /* distance from bottom of viewport */
+  right: 20px;              /* distance from right of viewport */
+  
+  width: 40px;              /* diameter of button */
+  height: 60px;
+  border-radius: 50%;       /* makes it circular */
+  
+  background-color: #007bff;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;      /* vertical center of + */
+  justify-content: center;  /* horizontal center of + */
+
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  z-index: 1000;            /* on top of other elements */
+  transition: transform 0.2s;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+  background-color: #0056b3;
+}
+/* Custom Alert Styles */
+/* Custom Alert Styles */
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 9999;
+  min-width: 300px;
+  transform: translateX(120%);
+  transition: transform 0.3s ease;
+}
+
+.custom-alert.show {
+  transform: translateX(0);
+}
+
+.custom-alert .close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0 5px;
+}
+
+.custom-alert .close:hover {
+  opacity: 0.8;
+}
+
+/* Modal Styles - Centered box that closes when clicking outside */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal-buttons button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-buttons button[type="submit"]:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.modal-buttons button:hover {
+  opacity: 0.9;
+}
+
+

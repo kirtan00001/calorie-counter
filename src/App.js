@@ -1,12 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom';
 import cal from './cal.png';     // your existing icon
 import auth from './auth.jpg';   // your existing icon
 import studyIcon from './study.png'; // ← add your own flashcard/study icon here (or use any png)
 import './App.css';
 import CalCounter from './CalCounter.js';
 import Study from './Study';     // new import
-
+import LoginPage from './pages/LoginPage';
+import CreateUserPage from './pages/CreateUserPage';
+import ChatsPage from './pages/ChatsPage';
+import UserPage from './pages/UserPage';
+import Chat from "./pages/ChatPage";
+import chatIcon from './chat.png';
 // Cool Box component with hover effects (unchanged)
 function Box({ name, icon, link, color }) {
   return (
@@ -65,6 +70,12 @@ function Home() {
             link="/study"
             color="#8b5cf6"
           />
+          <Box
+            name="Chats"
+            icon={chatIcon}           // ← your new icon
+            link="/chats"
+            color="#8b5cf6"
+          />
         </div>
       </div>
     </div>
@@ -82,6 +93,18 @@ function CalCounterPage() {
       <CalCounter />
     </div>
   );
+}
+
+function ProtectedRouter({ children }) {
+  const jwt = localStorage.getItem("jwt");
+  const refresh = localStorage.getItem("refresh");
+
+  if (!jwt || !refresh) {
+    console.log("Not logged in, redirecting to login page");
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 }
 
 // New Study Page
@@ -105,6 +128,33 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cal-counter" element={<CalCounterPage />} />
         <Route path="/study" element={<StudyPage />} />
+        <Route path="/chats" element={<ChatsPage />} />
+        <Route 
+          path="/" 
+          element={
+            <ProtectedRouter>
+              <UserPage />
+            </ProtectedRouter>
+          } 
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<CreateUserPage />} />
+        <Route 
+          path="/chats" 
+          element={
+            <ProtectedRouter>
+              <ChatsPage />
+            </ProtectedRouter>
+          } 
+        />
+        <Route 
+          path="/chat" 
+          element={
+            <ProtectedRouter>
+              <Chat />
+            </ProtectedRouter>
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );
