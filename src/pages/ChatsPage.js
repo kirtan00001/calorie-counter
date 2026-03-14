@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./ChatsPage.css";
+import LogoutButton from '../LogoutButton.js';
 const url = process.env.REACT_APP_API_URL;
+
 
 const handleChat = (id) => {
   window.location.href = `/chat?id=${id}`;
@@ -67,6 +70,7 @@ function Card ({ chat }) {
 const ChatsPage = () => {
   const [chats, setChats] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   // FIXED: wrapped in useEffect with empty dependency array
   useEffect(() => {
@@ -87,7 +91,6 @@ const ChatsPage = () => {
   }
 
   const handleCreateChat = async (chatName) => {
-    console.log("Creating chat:", chatName);
     setShowModal(false);
     try {
       const response = await fetch(`${url}/create-sub-chat`, {
@@ -97,7 +100,8 @@ const ChatsPage = () => {
       });
       const data = await response.json();
       if (data.message !== "Success!") {
-        alert('Error creating chat: ' + data.message);
+        localStorage.clear();
+        navigate("/sign-up")
         return;
       }
       if (data.new_jwt && data.new_jwt !== 'none') {
@@ -118,6 +122,7 @@ const ChatsPage = () => {
       </div>
 
       <FloatingButton onClick={createNewChat} />
+      <LogoutButton/>
 
       {showModal && (
         <CreateChatModal 

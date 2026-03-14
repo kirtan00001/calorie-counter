@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./ChatPage.css"
 const url = process.env.REACT_APP_API_URL;
 
@@ -24,7 +25,8 @@ const Chat = () => {
     const [chatz, setChatz] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef(null);
-    
+    const navigate = useNavigate();
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -48,7 +50,8 @@ const Chat = () => {
                 const messages = data.data.filter(f => f.chat_content != null);
                 setChatz(messages);
             } catch (error) {
-                alert('Error fetching chat: ' + error.message);
+                localStorage.clear();
+                navigate("/sign-up")
             }
         };
         
