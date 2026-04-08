@@ -12,6 +12,8 @@ import ChatsPage from './pages/ChatsPage';
 import UserPage from './pages/UserPage';
 import Chat from "./pages/ChatPage";
 import chatIcon from './chat.png';
+import ProfilePage from './pages/ProfilePage';
+import User_Page from './pages/User';
 // Cool Box component with hover effects (unchanged)
 function Box({ name, icon, link, color }) {
   return (
@@ -147,14 +149,30 @@ function App() {
             </ProtectedRouter>
           } 
         />
-        <Route 
-          path="/chat" 
-          element={
-            <ProtectedRouter>
-              <Chat />
-            </ProtectedRouter>
-          } 
-        />
+          <Route 
+            path="/chat" 
+            element={
+              <ProtectedRouter>
+                <Chat />
+              </ProtectedRouter>
+            } 
+          />
+          <Route 
+            path="/profile" 
+            element={
+              <ProtectedRouter>
+                <ProfilePage />
+              </ProtectedRouter>
+            } 
+          />
+                    <Route 
+            path="/user" 
+            element={
+              <ProtectedRouter>
+                <User_Page />
+              </ProtectedRouter>
+            } 
+          />
       </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,26 @@
+/* FORCE THE REACT ROOT TO EXPAND */
+#root {
+    height: auto !important;
+    min-height: 100vh !important;
+    display: block !important;
+    overflow: visible !important;
+}
 
+/* TARGET THE SCOPE DIV SPECIFICALLY */
+#calorie-app-scope {
+    display: block !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: visible !important;
+    position: relative !important;
+}
+
+/* ENSURE THE PAGE WRAPPER ISN'T THE TRAP */
+.cal-page {
+    height: auto !important;
+    overflow: visible !important;
+}
+#calorie-app-scope {
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;600;700&display=swap");
 
 :root {
@@ -2145,4 +2167,5 @@ h1 {
     animation: none !important;
     transition: none !important;
   }
+}
 }

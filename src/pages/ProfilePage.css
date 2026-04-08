@@ -1,0 +1,167 @@
+/* --- GLOBAL CONTAINER --- */
+.profile-page-container {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #0b0b0b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    padding: 100px 20px 50px 20px; /* Space for back button */
+    box-sizing: border-box;
+}
+
+/* --- BACK BUTTON --- */
+.back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #aaa;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 100;
+}
+
+.back-btn:hover {
+    color: white;
+    border-color: #3897f0;
+    background: #222;
+}
+
+/* --- WRAPPER FOR CARD + LIST --- */
+.profile-content-wrapper {
+    width: 100%;
+    max-width: 500px; /* Keeps everything tight and centered */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* --- PROFILE CARD --- */
+.profile-card {
+    background-color: #1a1a1a;
+    border: 1px solid #252525;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.large-profile-pfp {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3897f0;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(56, 151, 240, 0.2);
+}
+
+.profile-info-section h1 {
+    margin: 10px 0;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.profile-email {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.stat-box {
+    background: #111;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #222;
+    min-width: 80px;
+}
+
+.stat-box span {
+    display: block;
+    font-size: 0.65rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.stat-box p {
+    margin: 0;
+    font-weight: bold;
+    color: #3897f0;
+}
+
+/* --- MY CREATED CHATS SECTION --- */
+.my-chats-section {
+    width: 100%;
+}
+
+.my-chats-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #efefef;
+    letter-spacing: 0.5px;
+}
+
+.my-chats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.my-chat-item {
+    background: #1a1a1a;
+    border: 1px solid #252525;
+    padding: 18px 22px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.my-chat-item:hover {
+    border-color: #3897f0;
+    background: #222;
+    transform: translateX(5px);
+}
+
+.my-chat-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.my-chat-info span {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.arrow-icon {
+    color: #3897f0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.no-chats {
+    color: #444;
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+}

@@ -1,0 +1,146 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import "./ProfilePage.css";
+
+const url = process.env.REACT_APP_API_URL;
+
+const ProfilePage = () => {
+    const [pfpUrl, setPfpUrl] = useState(null);
+    const [myChats, setMyChats] = useState([]);
+    const [userData, setUserData] = useState({ username: "User", email: "" });
+    const navigate = useNavigate();
+    const defaultPfp = `${url}/uploads/users/default.png`;
+
+    useEffect(() => {
+        const jwt = localStorage.getItem("jwt");
+        const refresh = localStorage.getItem("refresh");
+
+        if (!jwt || !refresh) {
+            navigate("/login");
+            return;
+        }
+
+        // Helper to update JWT if backend refreshes it
+        const updateToken = (newJwt) => {
+            if (newJwt && newJwt !== 'none') {
+                localStorage.setItem("jwt", newJwt);
+            }
+        };
+
+        // 1. Fetch Profile Picture
+        const fetchPFP = async () => {
+            try {
+                const response = await fetch(`${url}/get-my-pfp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ jwt, refresh })
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    setPfpUrl(URL.createObjectURL(blob));
+                }
+            } catch (error) { console.error("Error fetching PFP:", error); }
+        };
+
+        // 2. Fetch User Info (Now using your new backend route)
+        const fetchUserInfo = async () => {
+            try {
+                const response = await fetch(`${url}/get-user-info`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ jwt, refresh })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    setUserData(data.user);
+                    updateToken(data.new_jwt);
+                }
+            } catch (e) { 
+                console.error("Error fetching user info:", e);
+                setUserData({ username: "Error Loading", email: "" });
+            }
+        };
+
+        // 3. Fetch "My Chats"
+        const fetchMyChats = async () => {
+            try {
+                const response = await fetch(`${url}/get-my-chats`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ jwt, refresh })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    setMyChats(data.data || []);
+                    updateToken(data.new_jwt);
+                }
+            } catch (error) { console.error("Error fetching my chats:", error); }
+        };
+
+        fetchPFP();
+        fetchUserInfo();
+        fetchMyChats();
+    }, [navigate]);
+
+    return (
+        <div className="profile-page-container">
+            <button className="back-btn" onClick={() => navigate("/chats")}>
+                ← Back to Chats
+            </button>
+            
+            <div className="profile-content-wrapper">
+                {/* Profile Section */}
+                <div className="profile-card">
+                    <img 
+                        src={pfpUrl || defaultPfp} 
+                        alt="Profile" 
+                        className="large-profile-pfp"
+                        onError={(e) => { e.target.src = defaultPfp; }}
+                    />
+                    {/* If data is still loading, display username from userData state */}
+                    <h1>{userData.username}</h1>
+                    <p className="profile-email">{userData.email || "Member Account"}</p>
+                    
+                    <div className="profile-stats">
+                        <div className="stat-box">
+                            <span>Posts</span>
+                            <p>{myChats.length}</p>
+                        </div>
+                        <div className="stat-box">
+                            <span>Status</span>
+                            <p>Active</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* My Chats List Section */}
+                <div className="my-chats-section">
+                    <h2>My Created Chats</h2>
+                    <div className="my-chats-list">
+                        {myChats.length > 0 ? (
+                            myChats.map((chat, index) => (
+                                <div 
+                                    key={chat.sub_chat_id || index} 
+                                    className="my-chat-item"
+                                    onClick={() => navigate(`/chat?id=${chat.sub_chat_id}`)}
+                                >
+                                    <div className="my-chat-info">
+                                        <h3>{chat.sub_chat_name}</h3>
+                                        <span>{new Date(parseInt(chat.timestamp)).toLocaleDateString()}</span>
+                                    </div>
+                                    <div className="arrow-icon">→</div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="no-chats">No chats found for your account.</p>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ProfilePage;

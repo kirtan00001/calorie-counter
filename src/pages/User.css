@@ -1,0 +1,231 @@
+/* --- GLOBAL CONTAINER --- */
+.profile-page-container {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #0b0b0b; /* Deep black background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 100px 20px 50px 20px;
+    box-sizing: border-box;
+}
+
+/* --- BACK BUTTON --- */
+.back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #aaa;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.back-btn:hover {
+    color: white;
+    border-color: #3897f0;
+    background: #222;
+    transform: translateX(-3px);
+}
+
+/* --- MAIN WRAPPER --- */
+.profile-content-wrapper {
+    width: 100%;
+    max-width: 500px; /* Keeps the profile vertical and focused */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* --- PROFILE HEADER CARD --- */
+.profile-card {
+    background-color: #1a1a1a;
+    border: 1px solid #252525;
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.large-profile-pfp {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3897f0;
+    margin-bottom: 20px;
+    box-shadow: 0 0 25px rgba(56, 151, 240, 0.25);
+    background-color: #333;
+}
+
+.profile-card h1 {
+    margin: 10px 0 5px 0;
+    font-size: 2rem;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.profile-email {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* --- STATS BOXES --- */
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.stat-box {
+    background: #111;
+    padding: 12px 24px;
+    border-radius: 14px;
+    border: 1px solid #222;
+    min-width: 100px;
+    transition: border-color 0.3s;
+}
+
+.stat-box:hover {
+    border-color: #333;
+}
+
+.stat-box span {
+    display: block;
+    font-size: 0.65rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.stat-box p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #3897f0;
+}
+
+/* --- RECENT MESSAGES LIST --- */
+.my-chats-section {
+    width: 100%;
+}
+
+.my-chats-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-align: left;
+    color: #888;
+    padding-left: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.my-chats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.my-chat-item {
+    background: #1a1a1a;
+    border: 1px solid #252525;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.my-chat-item:hover {
+    border-color: #3897f0;
+    background: #222;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.my-chat-info {
+    flex: 1;
+    padding-right: 15px;
+}
+
+/* The "In: Sub-chat Name" Label */
+.sub-chat-label {
+    font-size: 0.7rem;
+    color: #3897f0;
+    text-transform: uppercase;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+/* The actual message content preview */
+.chat-preview-text {
+    margin: 0 0 8px 0;
+    color: #efefef;
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.4;
+    word-break: break-word;
+    font-family: 'Georgia', serif; /* Makes quotes look nicer */
+}
+
+.chat-date {
+    font-size: 0.75rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.arrow-icon {
+    color: #333;
+    font-size: 1.4rem;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.my-chat-item:hover .arrow-icon {
+    color: #3897f0;
+    transform: translateX(3px);
+}
+
+.no-chats {
+    color: #444;
+    text-align: center;
+    padding: 40px;
+    border: 2px dashed #222;
+    border-radius: 16px;
+    font-style: italic;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+    .back-btn {
+        top: 20px;
+        left: 20px;
+        padding: 8px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .profile-card {
+        padding: 30px 20px;
+    }
+    
+    .large-profile-pfp {
+        width: 110px;
+        height: 110px;
+    }
+}

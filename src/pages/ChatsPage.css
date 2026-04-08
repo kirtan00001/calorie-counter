@@ -1,16 +1,13 @@
-.chat-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: .2rem;
-    margin-bottom: 1rem;
-    background-color: #221818;
-
-}
+/* --- GLOBAL RESET --- */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
+    background-color: #1a1a1a;
+    color: white;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 #root {
@@ -18,174 +15,266 @@ html, body {
     height: 100%;
 }
 
+/* --- CHAT CARDS GRID --- */
 .parent-card {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 100vw;       
-    max-width: 100vw;
-    margin: 0;
-    padding: 50px;
+    gap: 24px;
+    width: 100%;
+    padding: 120px 50px 50px 50px;
     box-sizing: border-box;
-    cursor: pointer;
+}
 
+.chat-card {
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 1.5rem;
+    background-color: #221818;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.chat-card:hover {
+    transform: translateY(-5px);
+    border-color: #007bff;
+    background-color: #2a1f1f;
+}
+
+.chat-card h3 {
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.chat-card p {
+    margin: 5px 0;
+    color: #aaa;
+    font-size: 0.9rem;
 }
 
 .date {
+    display: block;
     text-align: right;
-    margin-right: 20px;
-    color: rgb(229, 143, 143);
+    color: #e58f8f;
+    font-size: 0.8rem;
+    margin-top: 10px;
 }
 
-@media (max-width: 768px) {
-    .parent-card {
-        grid-template-columns: repeat(1, 1fr);
-    }
+/* --- HOVERABLE PFP MENU --- */
+.pfp-menu-wrapper {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
+.pfp-circle-trigger {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #333;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #444;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
 
+.pfp-menu-wrapper:hover .pfp-circle-trigger {
+    border-color: #007bff;
+}
+
+.pfp-circle-trigger img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pfp-dropdown {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    min-width: 180px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    padding: 6px 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.pfp-menu-wrapper:hover .pfp-dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pfp-dropdown-item {
+    padding: 12px 20px;
+    color: #e0e0e0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+    text-align: left;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pfp-dropdown-item:hover {
+    background-color: #3d3d3d;
+}
+
+.logout-item {
+    border-top: 1px solid #444;
+    margin-top: 4px;
+    padding: 0 !important;
+    position: relative !important;
+}
+
+.logout-item button {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    color: #ff4d4d !important;
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    text-align: left !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+.logout-item button:hover {
+    background-color: #3d3d3d !important;
+    border-radius: 0 0 8px 8px;
+}
+
+/* --- OTHER UI --- */
 .floating-btn {
-  position: fixed;          /* stays on screen always */
-  bottom: 20px;             /* distance from bottom of viewport */
-  right: 20px;              /* distance from right of viewport */
-  
-  width: 40px;              /* diameter of button */
-  height: 60px;
-  border-radius: 50%;       /* makes it circular */
-  
-  background-color: #007bff;
-  color: white;
-  font-size: 26px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;      /* vertical center of + */
-  justify-content: center;  /* horizontal center of + */
-
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  z-index: 1000;            /* on top of other elements */
-  transition: transform 0.2s;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    z-index: 2000;
 }
 
-.floating-btn:hover {
-  transform: scale(1.1);
-  background-color: #0056b3;
-}
-/* Custom Alert Styles */
-/* Custom Alert Styles */
-.custom-alert {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #333;
-  color: white;
-  padding: 15px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  z-index: 9999;
-  min-width: 300px;
-  transform: translateX(120%);
-  transition: transform 0.3s ease;
-}
-
-.custom-alert.show {
-  transform: translateX(0);
-}
-
-.custom-alert .close {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  margin-left: auto;
-  padding: 0 5px;
-}
-
-.custom-alert .close:hover {
-  opacity: 0.8;
-}
-
-/* Modal Styles - Centered box that closes when clicking outside */
+/* --- MODAL STYLING (The Fix) --- */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
 }
 
 .modal-content {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    background: #252525;
+    padding: 30px;
+    border-radius: 16px;
+    width: 400px;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    border: 1px solid #333;
 }
 
 .modal-content h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: #333;
+    margin: 0 0 20px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .modal-content input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box;
-  margin-bottom: 20px;
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 25px;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
 }
 
 .modal-content input:focus {
-  outline: none;
-  border-color: #007bff;
+    border-color: #007bff;
 }
 
 .modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
 }
 
 .modal-buttons button {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    border: none;
 }
 
-.modal-buttons button[type="button"] {
-  background-color: #6c757d;
-  color: white;
+/* Cancel Button */
+.modal-buttons button:first-child {
+    background: #333;
+    color: #ccc;
 }
 
-.modal-buttons button[type="submit"] {
-  background-color: #007bff;
-  color: white;
+.modal-buttons button:first-child:hover {
+    background: #444;
+    color: white;
 }
 
-.modal-buttons button[type="submit"]:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+/* Create Button */
+.modal-buttons button:last-child {
+    background: #007bff;
+    color: white;
 }
 
-.modal-buttons button:hover {
-  opacity: 0.9;
+.modal-buttons button:last-child:hover:not(:disabled) {
+    background: #0056b3;
 }
 
+.modal-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #555;
+}
 
+@media (max-width: 1024px) {
+    .parent-card { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .parent-card { grid-template-columns: 1fr; padding-top: 110px; }
+}

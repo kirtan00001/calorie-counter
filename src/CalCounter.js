@@ -2693,7 +2693,7 @@ export default function CalCounter() {
   };
 
   return (
-    <div
+  <div id="calorie-app-scope" className="calorie-counter">    <div
       className={`cal-page ${
         prefs.density === "compact" ? "density-compact" : ""
       }`}
@@ -4936,6 +4936,7 @@ export default function CalCounter() {
           )}
         </main>
       </div>
+    </div>
     </div>
   );
 }
