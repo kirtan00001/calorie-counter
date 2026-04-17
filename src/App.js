@@ -14,6 +14,9 @@ import Chat from "./pages/ChatPage";
 import chatIcon from './chat.png';
 import ProfilePage from './pages/ProfilePage';
 import User_Page from './pages/User';
+import Dm from "./pages/Dm"
+import FollowingPage from "./pages/Following";
+import FollowersPage from "./pages/Followers";
 // Cool Box component with hover effects (unchanged)
 function Box({ name, icon, link, color }) {
   return (
@@ -139,6 +142,14 @@ function App() {
             </ProtectedRouter>
           } 
         />
+                <Route 
+          path="/dm" 
+          element={
+            <ProtectedRouter>
+              <Dm />
+            </ProtectedRouter>
+          } 
+        />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<CreateUserPage />} />
         <Route 
@@ -170,6 +181,22 @@ function App() {
             element={
               <ProtectedRouter>
                 <User_Page />
+              </ProtectedRouter>
+            } 
+          />
+                              <Route 
+            path="/following" 
+            element={
+              <ProtectedRouter>
+                <FollowingPage />
+              </ProtectedRouter>
+            } 
+          />
+                                        <Route 
+            path="/followers" 
+            element={
+              <ProtectedRouter>
+                <FollowersPage />
               </ProtectedRouter>
             } 
           />

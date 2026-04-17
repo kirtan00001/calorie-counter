@@ -82,6 +82,47 @@
     gap: 15px;
 }
 
+/* Force the container to be a row and full width */
+.profile-stats-next {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    margin: 20px 0 !important;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+/* Force the boxes to have their background and share width */
+.stat-box-next {
+    flex: 1 !important;
+    background-color: #1a1a1a !important; 
+    border: 1px solid #333 !important;    
+    border-radius: 12px !important;
+    padding: 10px !important;
+    text-align: center !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+.stat-box-next:hover {
+    cursor: pointer;
+}
+
+/* Ensure text is visible and centered */
+.stat-box-next span {
+    color: #aaa !important;
+    font-size: 0.85rem !important;
+    margin-bottom: 4px !important;
+}
+
+.stat-box-next p {
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    margin: 0 !important;
+}
 .stat-box {
     background: #111;
     padding: 12px 20px;

@@ -40,7 +40,7 @@ const ChatsPage = () => {
             }
         };
         fetchChats();
-    }, []);
+    }, [navigate]);
 
     // 3. Fetch PFP
     useEffect(() => {
@@ -73,7 +73,7 @@ const ChatsPage = () => {
             }
         };
         fetchPFP();
-    }, [pfpTrigger]); 
+    }, [pfpTrigger, navigate]); 
 
     const handlePfpUpload = async (e) => {
         if (!e.target.files || e.target.files.length === 0) return;

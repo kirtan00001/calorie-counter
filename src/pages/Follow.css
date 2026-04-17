@@ -1,0 +1,110 @@
+.following-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: #fff;
+}
+
+.following-title {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.following-subtitle {
+    color: #888;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.following-subtitle b {
+    color: #2a78c9;
+}
+
+.following-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.following-item {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.following-item:hover {
+    background: #222;
+    border-color: #444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.following-avatar {
+    width: 40px;
+    height: 40px;
+    background: #2a78c9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+}
+.following-avatar-container {
+    width: 45px;
+    height: 45px;
+    margin-right: 15px;
+    border-radius: 50%;
+    overflow: hidden; /* Clips the image into a circle */
+    border: 2px solid #2a78c9;
+    flex-shrink: 0;
+}
+
+.following-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents squishing */
+}
+.following-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    flex-grow: 1;
+}
+
+.view-arrow {
+    color: #555;
+    font-size: 1.2rem;
+}
+
+.following-item:hover .view-arrow {
+    color: #2a78c9;
+}
+
+.no-following {
+    text-align: center;
+    color: #555;
+    margin-top: 50px;
+    font-style: italic;
+}
