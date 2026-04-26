@@ -24,9 +24,10 @@ const FollowingItem = ({ username, navigate }) => {
                     if (blob.size > 0) {
                         setPfp(URL.createObjectURL(blob));
                     }
+                    
                 }
             } catch (e) {
-                console.error("Error loading pfp for", username);
+                alert("Error loading pfp for", username);
             }
         };
         fetchPfp();
@@ -82,11 +83,11 @@ const FollowingPage = () => {
                 if (data.success) {
                     setFollowing(data.data || []);
                     if (data.new_jwt && data.new_jwt !== 'none') {
-                        localStorage.setItem("jwt", data.new_jwt);
+                        localStorage.setItem("jwt", data.new_jwt.new_jwt);
                     }
                 }
             } catch (error) { 
-                console.error("Error fetching following: ", error); 
+                alert("Error fetching following: ", error); 
             }
         };
 

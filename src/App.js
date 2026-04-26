@@ -17,6 +17,8 @@ import User_Page from './pages/User';
 import Dm from "./pages/Dm"
 import FollowingPage from "./pages/Following";
 import FollowersPage from "./pages/Followers";
+import Nav from './Nav';
+import SearchPage from './pages/SearchPage';
 // Cool Box component with hover effects (unchanged)
 function Box({ name, icon, link, color }) {
   return (
@@ -134,72 +136,90 @@ function App() {
         <Route path="/cal-counter" element={<CalCounterPage />} />
         <Route path="/study" element={<StudyPage />} />
         <Route path="/chats" element={<ChatsPage />} />
-        <Route 
-          path="/" 
+
+        <Route
+          path="/"
           element={
             <ProtectedRouter>
+              <Nav />
               <UserPage />
             </ProtectedRouter>
-          } 
+          }
         />
-                <Route 
-          path="/dm" 
+        <Route
+          path="/dm"
           element={
             <ProtectedRouter>
+              <Nav />
               <Dm />
             </ProtectedRouter>
-          } 
+          }
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<CreateUserPage />} />
-        <Route 
-          path="/chats" 
+        <Route
+          path="/chats"
           element={
             <ProtectedRouter>
+              <Nav />
               <ChatsPage />
             </ProtectedRouter>
-          } 
+          }
         />
-          <Route 
-            path="/chat" 
-            element={
-              <ProtectedRouter>
-                <Chat />
-              </ProtectedRouter>
-            } 
-          />
-          <Route 
-            path="/profile" 
-            element={
-              <ProtectedRouter>
-                <ProfilePage />
-              </ProtectedRouter>
-            } 
-          />
-                    <Route 
-            path="/user" 
-            element={
-              <ProtectedRouter>
-                <User_Page />
-              </ProtectedRouter>
-            } 
-          />
-                              <Route 
-            path="/following" 
-            element={
-              <ProtectedRouter>
-                <FollowingPage />
-              </ProtectedRouter>
-            } 
-          />
-                                        <Route 
-            path="/followers" 
-            element={
-              <ProtectedRouter>
-                <FollowersPage />
-              </ProtectedRouter>
-            } 
-          />
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRouter>
+              <Nav />
+              <Chat />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRouter>
+              <Nav />
+              <ProfilePage />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            <ProtectedRouter>
+              <Nav />
+              <User_Page />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="/following"
+          element={
+            <ProtectedRouter>
+              <Nav />
+              <FollowingPage />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="/followers"
+          element={
+            <ProtectedRouter>
+              <Nav />
+              <FollowersPage />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <ProtectedRouter>
+              <Nav />
+              <SearchPage />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

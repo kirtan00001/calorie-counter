@@ -29,34 +29,46 @@ const User_Page = () => {
             }
         };
         
-        const checkFollowing = async (me) => {
-            const infoRes = await fetch(`${url}/get-followers`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ jwt: localStorage.getItem("jwt"), refresh: localStorage.getItem("refresh"), username: targetUsername })
-            });
-            const infoData = await infoRes.json();
-            setFollowersCount(infoData.data.length);
+const checkFollowing = async (me) => {
+    // Get fresh tokens
+    const currentJwt = localStorage.getItem("jwt");
+    const currentRefresh = localStorage.getItem("refresh");
+
+    try {
+        const infoRes = await fetch(`${url}/get-followers`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ jwt: currentJwt, refresh: currentRefresh, username: targetUsername })
+        });
+        const infoData = await infoRes.json();
+
+        if (infoData.success) {
+            const followersList = infoData.data || [];
+            const actualCount = followersList.length;
             
-            const isFollowing = infoData.data.some(follower => follower.follower == me);        
-            if (isFollowing) {
+            // 1. Set the count directly from the data length
+            setFollowersCount(actualCount);
 
+            // 2. Check if "I" am in that list
+            const amIFollowing = followersList.some(follower => follower.follower === me);
+            setIsFollowing(amIFollowing);
+            
+        }
 
-            setIsFollowing(true);
-            setFollowersCount(followersCount + 1); 
-            } else {
-
-                setIsFollowing(false);
- 
-            }
-            const infoRes1 = await fetch(`${url}/get-following`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ jwt: localStorage.getItem("jwt"), refresh: localStorage.getItem("refresh"), username: targetUsername })
-            });
-            const infoData1 = await infoRes1.json();
+        const infoRes1 = await fetch(`${url}/get-following`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ jwt: currentJwt, refresh: currentRefresh, username: targetUsername })
+        });
+        const infoData1 = await infoRes1.json();
+        
+        if (infoData1.success) {
             setFollowingCount(infoData1.data.length);
-        };
+        }
+    } catch (err) {
+        console.error("Error in checkFollowing:", err);
+    }
+};
 
         const fetchMyData = async () => {
             const jwt = localStorage.getItem("jwt");

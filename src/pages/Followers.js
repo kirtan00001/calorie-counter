@@ -81,7 +81,7 @@ const FollowersPage = () => {
                 if (data.success) {
                     setFollowers(data.data || []);
                     if (data.new_jwt && data.new_jwt !== 'none') {
-                        localStorage.setItem("jwt", data.new_jwt);
+                        localStorage.setItem("jwt", data.new_jwt.new_jwt);
                     }
                 }
             } catch (error) { 
